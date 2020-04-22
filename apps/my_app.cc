@@ -3,6 +3,7 @@
 #include "my_app.h"
 
 #include <cinder/app/App.h>
+#include <dlib/svm.h>
 
 
 namespace myapp {
@@ -11,7 +12,9 @@ using cinder::app::KeyEvent;
 
 MyApp::MyApp() { }
 
-void MyApp::setup() { }
+void MyApp::setup() {
+  dlib::camera_transform();
+}
 
 void MyApp::update() { }
 

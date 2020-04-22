@@ -87,3 +87,16 @@ if(NOT catch2_POPULATED)
 endif()
 
 # Add more CMake libraries here ...
+FetchContent_Declare(
+        dlib
+        GIT_REPOSITORY https://github.com/davisking/dlib.git
+        GIT_TAG        v19.18
+)
+FetchContent_MakeAvailable(dlib) # Maybe
+
+FetchContent_GetProperties(dlib)
+if(NOT dlib_POPULATED)
+    FetchContent_Populate(dlib)
+    add_subdirectory(${dlib_SOURCE_DIR} ${dlib_BINARY_DIR})
+endif()
+
