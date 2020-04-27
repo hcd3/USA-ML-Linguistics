@@ -100,3 +100,4 @@ if(NOT dlib_POPULATED)
     add_subdirectory(${dlib_SOURCE_DIR} ${dlib_BINARY_DIR})
 endif()
 
+# target_link_libraries(cinder-myapp dlib)

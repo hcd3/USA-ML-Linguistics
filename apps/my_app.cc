@@ -4,6 +4,7 @@
 
 #include <cinder/app/App.h>
 #include <dlib/svm.h>
+#include <dlib/any.h>
 
 
 namespace myapp {
