@@ -12,7 +12,7 @@ namespace mylibrary {
 // Use every 6 lines of the trainingresponses file to create response
 std::vector<std::vector<std::string>> Organizer::CreateRawResponse(
     const std::string &file) {
-  // Create a new file stream
+  // Create a brand new file stream
   std::ifstream file_stream;
   file_stream.open(file);
   std::vector<std::vector<std::string>> training_responses;

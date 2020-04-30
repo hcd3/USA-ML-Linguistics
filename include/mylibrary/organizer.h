@@ -22,7 +22,7 @@ class Organizer {
   std::vector<std::vector<std::string>> CreateRawResponse(const std::string &file);
   // Returns a vector of all the answers in traininganswers
   std::vector<int> CreateAnswer(const std::string &file);
-  // Returns a vector of Image objects
+  // Returns a vector of Response objects
   std::vector<Response> CreateRealResponse(const std::vector<std::vector<std::string>>
                                      &training_responses, std::vector<int> training_answers);
 
