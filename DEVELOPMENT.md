@@ -13,3 +13,4 @@
     - Implemented object type 'Response' to store example answers to linguistic questions
 - **4/30/20** Create and write the proposal into this GitHub repository.
     - Essentially similar to the original approved proposal but simply relocated.
+    - Created organizer class that sorts data to be used by the dlib one_vs_one multiclass trainer
