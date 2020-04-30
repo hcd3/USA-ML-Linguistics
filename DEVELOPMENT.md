@@ -11,3 +11,5 @@
     - Still need to create training data utilizing the aforementioned probabilities
 - **4/28/20** Created training data for user responses and answers based on survey probabilities
     - Implemented object type 'Response' to store example answers to linguistic questions
+- **4/30/20** Create and write the proposal into this GitHub repository.
+    - Essentially similar to the original approved proposal but simply relocated.
