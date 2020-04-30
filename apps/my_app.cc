@@ -5,6 +5,7 @@
 #include <cinder/app/App.h>
 #include <dlib/svm.h>
 #include <dlib/any.h>
+#include <dlib/svm_threaded.h>
 
 
 namespace myapp {
@@ -15,6 +16,7 @@ MyApp::MyApp() { }
 
 void MyApp::setup() {
   dlib::camera_transform();
+  std::cout << "Hello there" << std::endl;
 }
 
 void MyApp::update() { }

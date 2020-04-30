@@ -10,3 +10,4 @@
     - Based off of state-by-state data from [Harvard Dialect Survey](http://www4.uwm.edu/FLL/linguistics/dialect/maps.html) 
     - Still need to create training data utilizing the aforementioned probabilities
 - **4/28/20** Created training data for user responses and answers based on survey probabilities
+    - Implemented object type 'Response' to store example answers to linguistic questions
