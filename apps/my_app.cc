@@ -18,6 +18,8 @@ namespace myapp {
 
 using cinder::app::KeyEvent;
 
+const char kNormalFont[] = "Arial Unicode MS";
+
 MyApp::MyApp() { }
 
 void MyApp::setup() {
@@ -57,7 +59,54 @@ void MyApp::setup() {
 
 void MyApp::update() { }
 
-void MyApp::draw() { }
+void MyApp::draw() {
+  DrawBackground();
+  const cinder::vec2 center = getWindowCenter();
+  const cinder::ivec2 size = {500, 50};
+  const cinder::Color color = cinder::Color::black();
+
+  size_t row = 0;
+  if (page_number_ == 0) {
+    PrintText("Game Over :(", color, size, {center.x, center.y - 200});
+  } else if (page_number_ == 1) {
+    std::cout << " Page 1" << std::endl;
+  } else if (page_number_ == 2) {
+    std::cout << " Page 2" << std::endl;
+  } else if (page_number_ == 3) {
+    std::cout << " Page 3" << std::endl;
+  } else if (page_number_ == 4) {
+    std::cout << " Page 4" << std::endl;
+  } else if (page_number_ == 5) {
+    std::cout << " Page 5" << std::endl;
+  } else if (page_number_ == 6) {
+    std::cout << " Page 6" << std::endl;
+  } else {
+    std::cout << " Page 7" << std::endl;
+  }
+}
+
+void MyApp::PrintText(const std::string& text, const cinder::Color& color,
+    const cinder::ivec2& size, const cinder::vec2& loc) {
+  cinder::gl::color(color);
+
+  auto box = cinder::TextBox()
+      .alignment(cinder::TextBox::CENTER)
+      .font(cinder::Font(kNormalFont, 30))
+      .size(size)
+      .color(color)
+      .backgroundColor(cinder::ColorA(0, 0, 0, 0))
+      .text(text);
+
+  const auto box_size = box.getSize();
+  const cinder::vec2 locp = {loc.x - box_size.x / 2, loc.y - box_size.y / 2};
+  const auto surface = box.render();
+  const auto texture = cinder::gl::Texture::create(surface);
+  cinder::gl::draw(texture, locp);
+}
+
+void MyApp::DrawBackground() const {
+  cinder::gl::clear(cinder::Color(0.313, 0.859, 0.391));
+}
 
 void MyApp::keyDown(KeyEvent event) {
   switch (event.getCode()) {
@@ -72,7 +121,7 @@ void MyApp::keyDown(KeyEvent event) {
 
     case KeyEvent::KEY_RIGHT:
     case KeyEvent::KEY_n: {
-      if (page_number_ != 8) {
+      if (page_number_ != 7) {
         page_number_++;
       }
       break;
