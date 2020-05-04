@@ -68,12 +68,14 @@ std::vector<int> Organizer::CreateAnswer(const std::string &file) {
 std::vector<Response> Organizer::CreateRealResponse(const std::vector<std::vector<std::string>>
                                           &training_responses, std::vector<int> training_answers) {
   std::vector<Response> responses;
+  std::vector<std::vector<char>> raw_responses;
   int counter = 0;
 
   for (const std::vector<std::string> &response_as_string : training_responses) {
     try {
       Response new_response = Response(response_as_string, training_answers.at(counter));
       responses.push_back(new_response);
+      raw_responses.push_back(new_response.choices);
       counter++;
     }
     catch (const std::out_of_range &exception){
@@ -81,6 +83,8 @@ std::vector<Response> Organizer::CreateRealResponse(const std::vector<std::vecto
     }
   }
 
+  // Stores complete responses with answers as well as without for ML model
+  raw_char_responses = raw_responses;
   real_responses = responses;
   return responses;
 }

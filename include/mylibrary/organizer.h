@@ -28,6 +28,8 @@ class Organizer {
 
   // All of the responses in the external files
   std::vector<Response> real_responses;
+  // The raw responses in char form
+  std::vector<std::vector<char>> raw_char_responses;
 };
 
 }  // namespace mylibrary

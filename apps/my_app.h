@@ -15,6 +15,11 @@ class MyApp : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
+
+ private:
+  size_t page_number_ = 0;
+  size_t question_number_ = 0;
+  std::vector<char> user_answers_;
 };
 
 }  // namespace myapp

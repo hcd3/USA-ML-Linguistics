@@ -14,3 +14,4 @@
 - **4/30/20** Create and write the proposal into this GitHub repository.
     - Essentially similar to the original approved proposal but simply relocated.
     - Created organizer class that sorts data to be used by the dlib one_vs_one multiclass trainer
+- **5/03/20** Implemented interface that allows user to select answers and toggle pages
