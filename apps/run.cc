@@ -20,7 +20,6 @@ const int kHeight = 800;
 void SetUp(App::Settings* settings) {
   settings->setWindowSize(kWidth, kHeight);
   settings->setTitle("My CS 126 Application");
-  std::cout << "Yo " << std::endl;
 }
 
 }  // namespace myapp

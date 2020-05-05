@@ -86,38 +86,74 @@ void MyApp::draw() {
               {center.x, center.y - 100}, 40);
     PrintText("a. 'car-ml' with 2 syllables\nb. 'carra-mel' with 3 syllables",
         color, size,{center.x, center.y}, 30);
-    std::cout << answers << std::endl;
+
+    // Notifies the user if they selected an answer
+    if (answer_selected != mylibrary::kNoChoice) {
+      PrintText("You selected " + answer_selected + "!",
+          cinder::ColorA(0, 0.398, 0.797), size,
+          {center.x, center.y + 150}, 28);
+    }
   } else if (page_number_ == 2) {
     PrintText("How do you pronounce lawyer?", color, size,
               {center.x, center.y - 100}, 40);
     PrintText("a. 'loyer' as in boy\nb. 'lawyer' as in saw",
               color, size,{center.x, center.y}, 30);
-    std::cout << answers << std::endl;
+
+    // Notifies the user if they selected an answer
+    if (answer_selected != mylibrary::kNoChoice) {
+      PrintText("You selected " + answer_selected + "!",
+                cinder::ColorA(0, 0.398, 0.797), size,
+                {center.x, center.y + 150}, 28);
+    }
   } else if (page_number_ == 3) {
     PrintText("How do you pronounce \nthe second vowel in pajamas?", color, size,
               {center.x, center.y - 100}, 40);
     PrintText("a. as in 'jam'\nb. as in 'father'",
               color, size,{center.x, center.y + 50}, 30);
-    std::cout << answers << std::endl;
+
+    // Notifies the user if they selected an answer
+    if (answer_selected != mylibrary::kNoChoice) {
+      PrintText("You selected " + answer_selected + "!",
+                cinder::ColorA(0, 0.398, 0.797), size,
+                {center.x, center.y + 200}, 28);
+    }
   } else if (page_number_ == 4) {
     PrintText("What's your generic term for \nsweetened, carbonated beverages?",
         color, size,{center.x, center.y - 100}, 40);
     PrintText("a. Soda\nb. Pop\nc. Coke",
               color, size,{center.x, center.y + 50}, 30);
-    std::cout << answers << std::endl;
+
+    // Notifies the user if they selected an answer
+    if (answer_selected != mylibrary::kNoChoice) {
+      PrintText("You selected " + answer_selected + "!",
+                cinder::ColorA(0, 0.398, 0.797), size,
+                {center.x, center.y + 200}, 28);
+    }
   } else if (page_number_ == 5) {
     PrintText("What's your generic term for \nshoes used for athletic activities"
               "\n or gym class?", color, size, {center.x, center.y - 100},
               40);
     PrintText("a. Tennis Shoes\nb. Sneakers\nc. Gym Shoes",
               color, size,{center.x, center.y + 100}, 30);
-    std::cout << answers << std::endl;
+
+    // Notifies the user if they selected an answer
+    if (answer_selected != mylibrary::kNoChoice) {
+      PrintText("You selected " + answer_selected + "!",
+                cinder::ColorA(0, 0.398, 0.797), size,
+                {center.x, center.y + 275}, 28);
+    }
   } else if (page_number_ == 6) {
     PrintText("What's your generic term for \na large, fast-moving road?",
         color, size,{center.x, center.y - 100}, 40);
     PrintText("a. Highway\nb. Freeway",
               color, size,{center.x, center.y + 50}, 30);
-    std::cout << answers << std::endl;
+
+    // Notifies the user if they selected an answer
+    if (answer_selected != mylibrary::kNoChoice) {
+      PrintText("You selected " + answer_selected + "!",
+                cinder::ColorA(0, 0.398, 0.797), size,
+                {center.x, center.y + 200}, 28);
+    }
   } else {
     std::cout << " Page 7" << std::endl;
   }
@@ -154,6 +190,7 @@ void MyApp::keyDown(KeyEvent event) {
       if (page_number_ != 0) {
         page_number_--;
       }
+      answer_selected = mylibrary::kNoChoice;
       break;
     }
 
@@ -162,22 +199,29 @@ void MyApp::keyDown(KeyEvent event) {
       if (page_number_ != 7) {
         page_number_++;
       }
+      answer_selected = mylibrary::kNoChoice;
       break;
     }
 
     case KeyEvent::KEY_a: {
       // When the user selects answer choice A
       user_answers_.push_back(mylibrary::kChoiceA);
+      answer_selected = "";
+      answer_selected.push_back(mylibrary::kChoiceA);
       break;
     }
     case KeyEvent::KEY_b: {
       // When the user selects answer choice B
       user_answers_.push_back(mylibrary::kChoiceB);
+      answer_selected = "";
+      answer_selected.push_back(mylibrary::kChoiceB);
       break;
     }
     case KeyEvent::KEY_c: {
       // When the user selects answer choice C
       user_answers_.push_back(mylibrary::kChoiceC);
+      answer_selected = "";
+      answer_selected.push_back(mylibrary::kChoiceC);
       break;
     }
 

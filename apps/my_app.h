@@ -29,7 +29,11 @@ class MyApp : public cinder::app::App {
   void PrintText(const std::string& text, const cinder::Color& color,
                         const cinder::ivec2& size, const cinder::vec2& loc,
                         int font_size);
+  // Keeps track of where the user is
   size_t page_number_ = 0;
+  // Used to notify user what answer they selected
+  std::string answer_selected = mylibrary::kNoChoice;
+  // The response used in the ML model
   std::vector<char> user_answers_;
 };
 
