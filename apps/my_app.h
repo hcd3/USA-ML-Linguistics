@@ -29,6 +29,7 @@ class MyApp : public cinder::app::App {
   void PrintText(const std::string& text, const cinder::Color& color,
                         const cinder::ivec2& size, const cinder::vec2& loc,
                         int font_size);
+  void DrawPrediction();
   // Keeps track of where the user is
   size_t page_number_ = 0;
   // Used to notify user what answer they selected

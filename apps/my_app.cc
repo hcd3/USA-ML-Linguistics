@@ -155,7 +155,7 @@ void MyApp::draw() {
                 {center.x, center.y + 200}, 28);
     }
   } else {
-    std::cout << " Page 7" << std::endl;
+    DrawPrediction();
   }
 }
 
@@ -180,6 +180,14 @@ void MyApp::PrintText(const std::string& text, const cinder::Color& color,
 
 void MyApp::DrawBackground() const {
   cinder::gl::clear(cinder::Color(0.313, 0.859, 0.391));
+}
+
+void MyApp::DrawPrediction() {
+  const cinder::vec2 center = getWindowCenter();
+  const cinder::ivec2 size = {2000, 200};
+  const cinder::Color color = cinder::Color::black();
+  PrintText("There is a 73% chance \nyou are from the Midwest!", color, size,
+            {center.x, center.y}, 55);
 }
 
 void MyApp::keyDown(KeyEvent event) {
