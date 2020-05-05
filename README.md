@@ -16,8 +16,8 @@ from the [Harvard Dialect Survey](http://www4.uwm.edu/FLL/linguistics/dialect/ma
 the Machine Learning model to predict whether you are from the **Northeast**, **South**, **Midwest**, or 
 **Pacific/Rockies**.
 
-![](https://github.com/CS126SP20/final-project-hcd3/blob/master/data/Title126.png)
+![](https://github.com/CS126SP20/final-project-hcd3/blob/master/data/Title126.png =504x504)
 
-![](https://github.com/CS126SP20/final-project-hcd3/blob/master/data/Question126.png)
+![](https://github.com/CS126SP20/final-project-hcd3/blob/master/data/Question126.png =504X504)
 
-![](https://github.com/CS126SP20/final-project-hcd3/blob/master/data/Prediction126.png)
+![](https://github.com/CS126SP20/final-project-hcd3/blob/master/data/Prediction126.png =504X504)
