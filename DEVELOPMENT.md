@@ -18,3 +18,4 @@
     - Still need to fix machine learning kernel issue
 - **5/04/20** Completed visual portion of user interface including the questions
     - Fixed user input for answer selections
+    - Implemented a notification that tells the user what answer they selected
