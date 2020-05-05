@@ -167,20 +167,17 @@ void MyApp::keyDown(KeyEvent event) {
 
     case KeyEvent::KEY_a: {
       // When the user selects answer choice A
-      user_answers_[question_number_] = mylibrary::kChoiceA;
-      question_number_++;
+      user_answers_.push_back(mylibrary::kChoiceA);
       break;
     }
     case KeyEvent::KEY_b: {
       // When the user selects answer choice B
-      user_answers_[question_number_] = mylibrary::kChoiceB;
-      question_number_++;
+      user_answers_.push_back(mylibrary::kChoiceB);
       break;
     }
     case KeyEvent::KEY_c: {
       // When the user selects answer choice C
-      user_answers_[question_number_] = mylibrary::kChoiceC;
-      question_number_++;
+      user_answers_.push_back(mylibrary::kChoiceC);
       break;
     }
 
