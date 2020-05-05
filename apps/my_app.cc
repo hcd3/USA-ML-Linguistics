@@ -62,36 +62,74 @@ void MyApp::update() { }
 void MyApp::draw() {
   DrawBackground();
   const cinder::vec2 center = getWindowCenter();
-  const cinder::ivec2 size = {500, 50};
+  const cinder::ivec2 size = {2000, 200};
   const cinder::Color color = cinder::Color::black();
 
   size_t row = 0;
+  std::string answers;
+  for (char c : user_answers_) {
+    answers += c;
+  }
   if (page_number_ == 0) {
-    PrintText("Game Over :(", color, size, {center.x, center.y - 200});
+    PrintText("U.S. Linguistics ML Model", color, size,
+        {center.x, center.y - 200}, 55);
+    PrintText("By asking you a series of 6 carefully selected\n questions about "
+              "your speech patterns and \nlinguistic tendencies, this program will "
+              "use \na Machine Learning model to predict which region \nof the U.S."
+              "you are from!", color, size, {center.x, center.y - 75}, 28);
+    PrintText("Instructions: Use 'p' or the left arrow\n for the previous "
+              "page, 'n' or the right arrow\n for the next page, and press 'a' "
+              "'b' or 'c' \nfor the corresponding answer choice.", color, size,
+              {center.x, center.y + 150}, 25);
   } else if (page_number_ == 1) {
-    std::cout << " Page 1" << std::endl;
+    PrintText("How do you pronounce caramel?", color, size,
+              {center.x, center.y - 100}, 40);
+    PrintText("a. 'car-ml' with 2 syllables\nb. 'carra-mel' with 3 syllables",
+        color, size,{center.x, center.y}, 30);
+    std::cout << answers << std::endl;
   } else if (page_number_ == 2) {
-    std::cout << " Page 2" << std::endl;
+    PrintText("How do you pronounce lawyer?", color, size,
+              {center.x, center.y - 100}, 40);
+    PrintText("a. 'loyer' as in boy\nb. 'lawyer' as in saw",
+              color, size,{center.x, center.y}, 30);
+    std::cout << answers << std::endl;
   } else if (page_number_ == 3) {
-    std::cout << " Page 3" << std::endl;
+    PrintText("How do you pronounce \nthe second vowel in pajamas?", color, size,
+              {center.x, center.y - 100}, 40);
+    PrintText("a. as in 'jam'\nb. as in 'father'",
+              color, size,{center.x, center.y + 50}, 30);
+    std::cout << answers << std::endl;
   } else if (page_number_ == 4) {
-    std::cout << " Page 4" << std::endl;
+    PrintText("What's your generic term for \nsweetened, carbonated beverages?",
+        color, size,{center.x, center.y - 100}, 40);
+    PrintText("a. Soda\nb. Pop\nc. Coke",
+              color, size,{center.x, center.y + 50}, 30);
+    std::cout << answers << std::endl;
   } else if (page_number_ == 5) {
-    std::cout << " Page 5" << std::endl;
+    PrintText("What's your generic term for \nshoes used for athletic activities"
+              "\n or gym class?", color, size, {center.x, center.y - 100},
+              40);
+    PrintText("a. Tennis Shoes\nb. Sneakers\nc. Gym Shoes",
+              color, size,{center.x, center.y + 100}, 30);
+    std::cout << answers << std::endl;
   } else if (page_number_ == 6) {
-    std::cout << " Page 6" << std::endl;
+    PrintText("What's your generic term for \na large, fast-moving road?",
+        color, size,{center.x, center.y - 100}, 40);
+    PrintText("a. Highway\nb. Freeway",
+              color, size,{center.x, center.y + 50}, 30);
+    std::cout << answers << std::endl;
   } else {
     std::cout << " Page 7" << std::endl;
   }
 }
 
 void MyApp::PrintText(const std::string& text, const cinder::Color& color,
-    const cinder::ivec2& size, const cinder::vec2& loc) {
+    const cinder::ivec2& size, const cinder::vec2& loc, const int font_size) {
   cinder::gl::color(color);
 
   auto box = cinder::TextBox()
       .alignment(cinder::TextBox::CENTER)
-      .font(cinder::Font(kNormalFont, 30))
+      .font(cinder::Font(kNormalFont, font_size))
       .size(size)
       .color(color)
       .backgroundColor(cinder::ColorA(0, 0, 0, 0))

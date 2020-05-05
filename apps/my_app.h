@@ -27,7 +27,8 @@ class MyApp : public cinder::app::App {
  private:
   void DrawBackground() const;
   void PrintText(const std::string& text, const cinder::Color& color,
-                        const cinder::ivec2& size, const cinder::vec2& loc);
+                        const cinder::ivec2& size, const cinder::vec2& loc,
+                        const int font_size);
   size_t page_number_ = 0;
   size_t question_number_ = 0;
   std::vector<char> user_answers_;
