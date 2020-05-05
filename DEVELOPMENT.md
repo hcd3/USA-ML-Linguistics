@@ -19,3 +19,5 @@
 - **5/04/20** Completed visual portion of user interface including the questions
     - Fixed user input for answer selections
     - Implemented a notification that tells the user what answer they selected
+- **5/05/20** Added images of the the application running to GitHub repository
+    - Finished writing the README.md file
