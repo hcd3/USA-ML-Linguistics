@@ -3,7 +3,7 @@
 #include "my_app.h"
 
 #include <cinder/app/App.h>
-//#include <dlib/svm.h>
+#include <dlib/svm.h>
 #include <dlib/any.h>
 #include <dlib/svm_threaded.h>
 #include <mylibrary/response.h>
@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 
-typedef dlib::matrix<char, 2, 1> my_type;
+typedef dlib::vector<char> my_type;
 
 namespace myapp {
 
@@ -20,7 +20,8 @@ using cinder::app::KeyEvent;
 
 const char kNormalFont[] = "Arial Unicode MS";
 
-MyApp::MyApp() { }
+MyApp::MyApp() {
+}
 
 void MyApp::setup() {
   // Store all the training data in a logical manner
@@ -35,26 +36,22 @@ void MyApp::setup() {
   responses = data_organizer.CreateRealResponse(training_responses, training_answers);
 
   // Machine Learning algorithms
-  typedef dlib::one_vs_one_trainer<dlib::any_trainer<my_type>, int> ovo_trainer;
+  typedef dlib::one_vs_one_trainer<dlib::any_trainer<my_type>> ovo_trainer;
   ovo_trainer trainer;
 
   // Binary classification trainer objects
   // Use kernel ridge regression and support vector machine
   typedef dlib::polynomial_kernel<my_type> poly_kernel;
   typedef dlib::radial_basis_kernel<my_type> rbf_kernel;
-
   dlib::svm_nu_trainer<poly_kernel> poly_trainer;
   dlib::krr_trainer<rbf_kernel> rbf_trainer;
-  poly_trainer.set_kernel(poly_kernel('a', 1, 2));
+
+  // Calibrates each trainer to use the kernel objects below
+  poly_trainer.set_kernel(poly_kernel(1, 1, 2));
   rbf_trainer.set_kernel(rbf_kernel('a'));
 
-  // Calibrates each trainer to use the kernel objects above
-  /*trainer.set_trainer(rbf_trainer);
-  trainer.set_trainer(poly_trainer, 1, 2);
-
   dlib::randomize_samples(data_organizer.raw_char_responses, training_answers);
-  std::cout << "Result: \n" << cross_validate_multiclass_trainer(trainer,
-      data_organizer.raw_char_responses, training_answers, 5) << std::endl;*/
+
 }
 
 void MyApp::update() { }

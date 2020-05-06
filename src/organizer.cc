@@ -59,6 +59,13 @@ std::vector<int> Organizer::CreateAnswer(const std::string &file) {
     std::cerr << "Your file couldn't be opened or doesn't exist." << std::endl;
   }
 
+  // Initializes the amount of each answer
+  for (int a : training_answer) {
+    double amount = Organizer::answer_amount[a] + 1;
+    Organizer::answer_amount[a] = amount;
+  }
+  Organizer::answer_amount[0] = 0;
+
   // Return geographical regions as a vector of ints
   return training_answer;
 }
@@ -87,6 +94,74 @@ std::vector<Response> Organizer::CreateRealResponse(const std::vector<std::vecto
   raw_char_responses = raw_responses;
   real_responses = responses;
   return responses;
+}
+
+double Organizer::AnswerOccurProbability(const int &answer) {
+  double total_answers = 0;
+  for (double i : Organizer::answer_amount) {
+    total_answers += i;
+  }
+
+  return (Organizer::answer_amount[answer] / total_answers);
+}
+
+double Organizer::NumberOfAnswers(int question, int answer, char selection) {
+  double num_of_answers = 0.0;
+
+  for (auto & response : real_responses) {
+    if (response.answer == answer && response.choices.at(question) == selection) {
+      num_of_answers++;
+    }
+  }
+
+  return num_of_answers;
+}
+
+void Organizer::FillProbsArray() {
+  for (int question = 0; question < mylibrary::kResponseLength; question++) {
+    for (int answer = 1; answer <= kNumAnswers; answer++) {
+      double numerator1 = kLapalce + Organizer::NumberOfAnswers(question, answer, 'a');
+      double numerator2 = kLapalce + Organizer::NumberOfAnswers(question, answer, 'b');
+      double numerator3 = kLapalce + Organizer::NumberOfAnswers(question, answer, 'c');
+      double denominator = (2.0*kLapalce) + Organizer::answer_amount[answer];
+      probs_[question][answer][0] = numerator1 / denominator;
+      probs_[question][answer][1] = numerator2 / denominator;
+      probs_[question][answer][2] = numerator3 / denominator;
+    }
+  }
+
+  // Fills out the answer_occur_probs array
+  for (int i = 1; i <= kNumAnswers; i++) {
+    Organizer::answer_occur_probs.push_back(Organizer::AnswerOccurProbability(i));
+  }
+}
+
+double Organizer::CalculateProb(const Response &response, const int &answer) {
+  double probability = 0.0;
+  for (int question = 0; question < mylibrary::kResponseLength; question++) {
+    char selection = response.choices.at(question);
+    if (selection == 'a') {
+      probability += log(probs_[question][answer][0]);
+    } else if (selection == 'b') {
+      probability += log(probs_[question][answer][1]);
+    } else {
+      probability += log(probs_[question][answer][2]);
+    }
+  }
+  return probability + log(answer_occur_probs.at(answer - 1)); //TODO plus one cuz of stuff
+}
+
+int Organizer::PredictUserAnswer(const Response &response) {
+  int answer = 0;
+  double max_prob = -999.9;
+  for (int a = 1; a <= kNumAnswers; a++) {
+    double probability = Organizer::CalculateProb(response, a);
+    if (probability >= max_prob) {
+      max_prob = probability;
+      answer = a;
+    }
+  }
+  return answer;
 }
 
 }  // namespace mylibrary
