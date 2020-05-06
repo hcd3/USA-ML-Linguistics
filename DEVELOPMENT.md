@@ -22,3 +22,7 @@
 - **5/05/20** Added images of the the application running to GitHub repository
     - Finished writing the README.md file
     - Added tests for non-GUI components of the program
+    - Fixed bug in machine learning kernel algorithm
+- **5/06/20** Added helper algorithms to the Organizer class
+    - Printed out the machine learning prediction in the user interface
+    - Made some final adjustments to the visuals
