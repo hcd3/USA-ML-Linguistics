@@ -189,16 +189,16 @@ void MyApp::DrawPrediction() {
   const cinder::ivec2 size = {2000, 200};
   const cinder::Color color = cinder::Color::black();
   if (region == 1) {
-    PrintText("There is a good chance \nyou are from the Northeast!",
+    PrintText("There is a good chance \n you are from the Northeast!",
         color, size, {center.x, center.y}, 55);
   } else if (region == 2) {
-    PrintText("There is a good chance \nyou are from the South!",
+    PrintText("There is a good chance \n you are from the South!",
               color, size, {center.x, center.y}, 55);
   } else if (region == 3) {
-    PrintText("There is a good chance \nyou are from the Midwest!",
+    PrintText("There is a good chance \n you are from the Midwest!",
               color, size, {center.x, center.y}, 55);
   } else {
-    PrintText("There is a good chance \nyou are from the Pacific/Rockies!",
+    PrintText("There is a good chance \n you are from the \nPacific/Rockies!",
               color, size, {center.x, center.y}, 55);
   }
 }
