@@ -24,34 +24,6 @@ MyApp::MyApp() {
 }
 
 void MyApp::setup() {
-  // Store all the training data in a logical manner
-  mylibrary::Organizer data_organizer = mylibrary::Organizer();
-  std::vector<std::vector<std::string>> training_responses;
-  training_responses = data_organizer.CreateRawResponse(
-      "/home/hrishi/Cinder/my-projects/final-project-hcd3/data/trainingresponses");
-  std::vector<int> training_answers;
-  training_answers = data_organizer.CreateAnswer(
-      "/home/hrishi/Cinder/my-projects/final-project-hcd3/data/traininganswers");
-  std::vector<mylibrary::Response> responses;
-  responses = data_organizer.CreateRealResponse(training_responses, training_answers);
-
-  // Machine Learning algorithms
-  typedef dlib::one_vs_one_trainer<dlib::any_trainer<my_type>> ovo_trainer;
-  ovo_trainer trainer;
-
-  // Binary classification trainer objects
-  // Use kernel ridge regression and support vector machine
-  typedef dlib::polynomial_kernel<my_type> poly_kernel;
-  typedef dlib::radial_basis_kernel<my_type> rbf_kernel;
-  dlib::svm_nu_trainer<poly_kernel> poly_trainer;
-  dlib::krr_trainer<rbf_kernel> rbf_trainer;
-
-  // Calibrates each trainer to use the kernel objects below
-  poly_trainer.set_kernel(poly_kernel(1, 1, 2));
-  rbf_trainer.set_kernel(rbf_kernel('a'));
-
-  dlib::randomize_samples(data_organizer.raw_char_responses, training_answers);
-
 }
 
 void MyApp::update() { }
@@ -62,10 +34,9 @@ void MyApp::draw() {
   const cinder::ivec2 size = {2000, 200};
   const cinder::Color color = cinder::Color::black();
 
-  size_t row = 0;
   std::string answers;
-  for (char c : user_answers_) {
-    answers += c;
+  for (std::string s : user_answers_) {
+    answers += s;
   }
   if (page_number_ == 0) {
     PrintText("U.S. Linguistics ML Model", color, size,
@@ -180,11 +151,56 @@ void MyApp::DrawBackground() const {
 }
 
 void MyApp::DrawPrediction() {
+  // Store all the training data in a logical manner
+  mylibrary::Organizer data_organizer = mylibrary::Organizer();
+  std::vector<std::vector<std::string>> training_responses;
+  training_responses = data_organizer.CreateRawResponse(
+      "/home/hrishi/Cinder/my-projects/final-project-hcd3/data/trainingresponses");
+  std::vector<int> training_answers;
+  training_answers = data_organizer.CreateAnswer(
+      "/home/hrishi/Cinder/my-projects/final-project-hcd3/data/traininganswers");
+  std::vector<mylibrary::Response> responses;
+  responses = data_organizer.CreateRealResponse(training_responses, training_answers);
+
+  // Machine Learning algorithms
+  typedef dlib::one_vs_one_trainer<dlib::any_trainer<my_type>> ovo_trainer;
+  ovo_trainer trainer;
+
+  // Binary classification trainer objects
+  // Use kernel ridge regression and support vector machine
+  typedef dlib::polynomial_kernel<my_type> poly_kernel;
+  typedef dlib::radial_basis_kernel<my_type> rbf_kernel;
+  dlib::svm_nu_trainer<poly_kernel> poly_trainer;
+  dlib::krr_trainer<rbf_kernel> rbf_trainer;
+
+  // Calibrates each trainer to use the kernel objects below
+  poly_trainer.set_kernel(poly_kernel(1, 1, 2));
+  rbf_trainer.set_kernel(rbf_kernel('a'));
+
+  dlib::randomize_samples(data_organizer.raw_char_responses, training_answers);
+
+  data_organizer.FillProbsArray();
+  mylibrary::Response user_response = mylibrary::Response(user_answers_, 1);
+
+  // Predicts where they are from (overall goal of program)
+  int region = data_organizer.PredictUserAnswer(user_response);
+
   const cinder::vec2 center = getWindowCenter();
   const cinder::ivec2 size = {2000, 200};
   const cinder::Color color = cinder::Color::black();
-  PrintText("There is a 73% chance \nyou are from the Midwest!", color, size,
-            {center.x, center.y}, 55);
+  if (region == 1) {
+    PrintText("There is a good chance \nyou are from the Northeast!",
+        color, size, {center.x, center.y}, 55);
+  } else if (region == 2) {
+    PrintText("There is a good chance \nyou are from the South!",
+              color, size, {center.x, center.y}, 55);
+  } else if (region == 3) {
+    PrintText("There is a good chance \nyou are from the Midwest!",
+              color, size, {center.x, center.y}, 55);
+  } else {
+    PrintText("There is a good chance \nyou are from the Pacific/Rockies!",
+              color, size, {center.x, center.y}, 55);
+  }
 }
 
 void MyApp::keyDown(KeyEvent event) {
@@ -212,21 +228,21 @@ void MyApp::keyDown(KeyEvent event) {
       // When the user selects answer choice A
       user_answers_.push_back(mylibrary::kChoiceA);
       answer_selected = "";
-      answer_selected.push_back(mylibrary::kChoiceA);
+      answer_selected = mylibrary::kChoiceA;
       break;
     }
     case KeyEvent::KEY_b: {
       // When the user selects answer choice B
       user_answers_.push_back(mylibrary::kChoiceB);
       answer_selected = "";
-      answer_selected.push_back(mylibrary::kChoiceB);
+      answer_selected = mylibrary::kChoiceB;
       break;
     }
     case KeyEvent::KEY_c: {
       // When the user selects answer choice C
       user_answers_.push_back(mylibrary::kChoiceC);
       answer_selected = "";
-      answer_selected.push_back(mylibrary::kChoiceC);
+      answer_selected = mylibrary::kChoiceC;
       break;
     }
 

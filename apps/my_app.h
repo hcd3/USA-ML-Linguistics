@@ -35,7 +35,7 @@ class MyApp : public cinder::app::App {
   // Used to notify user what answer they selected
   std::string answer_selected = mylibrary::kNoChoice;
   // The response used in the ML model
-  std::vector<char> user_answers_;
+  std::vector<std::string> user_answers_;
 };
 
 }  // namespace myapp

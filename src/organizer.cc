@@ -148,7 +148,7 @@ double Organizer::CalculateProb(const Response &response, const int &answer) {
       probability += log(probs_[question][answer][2]);
     }
   }
-  return probability + log(answer_occur_probs.at(answer - 1)); //TODO plus one cuz of stuff
+  return probability + log(answer_occur_probs.at(answer - 1));
 }
 
 int Organizer::PredictUserAnswer(const Response &response) {

@@ -10,9 +10,9 @@
 
 namespace mylibrary {
 constexpr size_t kResponseLength = 6;  // Number of questions asked
-const char kChoiceA = 'a';
-const char kChoiceB = 'b';
-const char kChoiceC = 'c';
+const std::string kChoiceA = "a";
+const std::string kChoiceB = "b";
+const std::string kChoiceC = "c";
 const std::string kNoChoice = "z";
 
 class Response {
