@@ -21,3 +21,4 @@
     - Implemented a notification that tells the user what answer they selected
 - **5/05/20** Added images of the the application running to GitHub repository
     - Finished writing the README.md file
+    - Added tests for non-GUI components of the program
