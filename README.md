@@ -12,7 +12,7 @@ layout.
 
 Despite all speaking the same language, there is a vast amount of variety in the continental United
 States in our lingustic tendencies and what we call day-to-day items!  As you take this quiz, data collected
-from the [Harvard Dialect Survey](http://www4.uwm.edu/FLL/linguistics/dialect/maps.html) helps train
+from the [Harvard Dialect Survey](http://dialect.redlog.net/maps.html) helps train
 the Machine Learning model to predict whether you are from the **Northeast**, **South**, **Midwest**, or 
 **Pacific/Rockies**.
 
